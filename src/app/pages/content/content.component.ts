@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {dataFake} from '../../data/dataFake'
+import { RickandmortyapiService } from 'src/app/services/rickandmortyapi.service';
 
 @Component({
   selector: 'app-content',
@@ -10,11 +11,20 @@ import {dataFake} from '../../data/dataFake'
 export class ContentComponent implements OnInit {
   photoCover:string = ""
   contentTitle:string = ""
-  contentDescription:string = ""
-  private id:string | null = "0"
+
+  person = {
+    status:"",
+    species:"",
+    type:"",
+    gender:"",
+    location:""
+  }
+
+  private id:any
 
   constructor(
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private rickandmortyapi:RickandmortyapiService
   ) { }
 
   ngOnInit(): void {
@@ -22,15 +32,26 @@ export class ContentComponent implements OnInit {
      this.id = value.get("id")
     )
 
+    this.rickandmortyapi.getPerson(this.id).subscribe((item) => {
+      this.photoCover = item.image;
+      this.contentTitle = item.name;
+
+      this.person = {
+        status: item.status,
+        species: item.species,
+        type: item.type,
+        gender: item.gender,
+        location: item.location.name
+      }
+      
+     })
+
     this.setValuesToComponent(this.id)
   }
 
   setValuesToComponent(id:string | null){
     const result = dataFake.filter(article => article.id == id)[0]
-
     this.contentTitle = result.title
-    this.contentDescription = result.description
     this.photoCover = result.photoCover
   }
-
 }

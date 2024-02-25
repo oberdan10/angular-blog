@@ -4,9 +4,13 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
-  background-color: #111111;
-  color:white;
+  color:rgb(0, 0, 0);
   font-family: 'Open Sans', sans-serif;
+  
+}
+
+body{
+  background-color: #f2e9e6;
 }
 
 a{

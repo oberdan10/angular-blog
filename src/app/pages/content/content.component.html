@@ -3,13 +3,25 @@
     <img src="{{ photoCover }}" alt="" srcset="">
   </div>
   <div class="content__title">
-    <h1>{{ contentTitle }}</h1>
-    <hr />
+    <h2>{{ contentTitle }}</h2>
   </div>
+  <div class="content__info">
+
+    <div class="content__info__data">
+      <p><strong>STATUS:</strong> {{person.status}}</p>
+      <p><strong>SPECIES:</strong> {{person.species}}</p>
+      <p><strong>TYPE:</strong> {{person.type}}</p>
+      <p><strong>GENDER:</strong> {{person.gender}}</p>
+    </div>
+
+    <div class="content__info__location">
+      <p><strong>LOCATION:</strong> {{person.location}}</p>
+    </div>
+
+
+  </div>
+
   <div class="content__description">
     <a [routerLink]="['']"> << VOLTAR </a>
-    <p>
-      {{ contentDescription }}
-    </p>
   </div>
 </div>
